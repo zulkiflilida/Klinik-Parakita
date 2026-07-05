@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klinik Gigi Parakita Medika</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            light: '#2ecc71', // Lighter green
+                            DEFAULT: '#0f764a', // Main brand green
+                            dark: '#0a5234', // Darker green
+                            accent: '#4ade80' // Accent bright green
+                        }
+                    },
+                    boxShadow: {
+                        'premium': '0 20px 50px -12px rgba(15, 118, 74, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .booking-input:focus {
+            outline: none;
+            border-color: #0f764a;
+            box-shadow: 0 0 0 3px rgba(15, 118, 74, 0.15);
+        }
+
+        /* FAQ Accordion Transition */
+        .faq-answer {
+            transition: all 0.3s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+        .faq-answer.open {
+            max-height: 500px; /* arbitrary max height */
+            opacity: 1;
+            padding-bottom: 1.5rem;
+        }
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        .faq-icon.open {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased font-sans flex flex-col min-h-screen relative overflow-x-hidden">
+
+    <header class="fixed w-full z-50 transition-all duration-300 bg-transparent py-4" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="flex items-center gap-3 group">
+                        <div class="w-10 h-10 bg-brand rounded-full flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform">
+                            <i class="fa-solid fa-tooth text-xl"></i>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="font-extrabold text-2xl leading-none text-brand-dark tracking-tight">Parakita</span>
+                            <span class="text-xs font-bold text-brand tracking-widest uppercase mt-0.5">Medika</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="#" class="text-gray-800 hover:text-brand font-semibold transition-colors">Beranda</a>
+                    <a href="#fasilitas" class="text-gray-600 hover:text-brand font-medium transition-colors">Fasilitas</a>
+                    <a href="#dokter" class="text-gray-600 hover:text-brand font-medium transition-colors">Dokter Kami</a>
+                    <a href="#testimoni" class="text-gray-600 hover:text-brand font-medium transition-colors">Testimoni</a>
+                    <a href="#faq" class="text-gray-600 hover:text-brand font-medium transition-colors">FAQ</a>
+                </nav>
+
+                <!-- Desktop CTA -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="https://wa.me/6285255281488?text=Halo%20Klinik%20Parakita%20Medika,%20saya%20ingin%20konsultasi/reservasi" 
+                       target="_blank"
+                       class="inline-flex items-center px-6 py-2.5 border border-transparent text-sm font-bold rounded-full shadow-md text-white bg-brand hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand transition-all hover:shadow-lg transform hover:-translate-y-0.5">
+                        Reservasi Sekarang
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow pt-24">
+        
+        <section id="beranda" class="relative bg-gray-50 overflow-visible pb-24 lg:pb-32 pt-8 lg:pt-16">
+            <div class="absolute -top-24 -left-24 w-96 h-96 bg-brand-accent/20 rounded-full blur-3xl opacity-50 z-0"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Left Text Content -->
+                    <div class="lg:col-span-7 flex flex-col justify-center text-center lg:text-left order-2 lg:order-1 mt-10 lg:mt-0">
+                        <div class="inline-flex items-center px-4 py-2 rounded-full bg-white shadow-sm border border-gray-100 mb-6 mx-auto lg:mx-0 w-max">
+                            <div class="w-6 h-6 rounded-full bg-brand/10 flex items-center justify-center mr-2">
+                                <i class="fa-solid fa-tooth text-brand text-xs"></i>
+                            </div>
+                            <span class="text-sm font-semibold text-gray-700">Klinik Gigi Terpercaya di Makassar</span>
+                        </div>
+                        
+                        <h1 class="text-5xl sm:text-6xl lg:text-[4.5rem] font-extrabold text-gray-900 tracking-tight mb-6 leading-[1.1]">
+                            Balikin Senyum <br class="hidden lg:block">
+                            <span class="text-brand relative inline-block">
+                                Cantikmu
+                                <svg class="absolute w-full h-3 -bottom-1 left-0 text-brand-accent opacity-70" viewBox="0 0 200 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.38555 9.77124C34.8213 3.6393 91.9567 -2.1287 197.632 7.74797" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg>
+                            </span>
+                            <br class="hidden lg:block"> Bersama Kami
+                        </h1>
+                        
+                        <p class="mt-2 text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed mb-10">
+                            Nikmati pengalaman perawatan gigi yang nyaman dan profesional. Dengan fasilitas modern dan dokter spesialis berpengalaman, kami siap memberikan pelayanan terbaik.
+                        </p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                            <a href="#fasilitas" 
+                               class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-brand rounded-full hover:bg-brand-dark transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                                Jelajahi Layanan
+                            </a>
+                            <a href="https://wa.me/6285255281488" target="_blank"
+                               class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-gray-700 bg-white border border-gray-200 rounded-full hover:bg-gray-50 transition-all shadow-sm hover:shadow-md group">
+                                <i class="fa-brands fa-whatsapp text-green-500 text-xl mr-2"></i>
+                                Konsultasi Gratis
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Image Section -->
+                    <div class="lg:col-span-5 relative order-1 lg:order-2 flex justify-center lg:justify-end">
+                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] sm:w-[450px] sm:h-[450px] bg-gradient-to-tr from-brand to-brand-light rounded-full z-0 opacity-90" style="border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;"></div>
+                        
+                        <div class="relative z-10 w-full max-w-sm pt-8">
+                            <img src="hero.png" 
+                                 alt="Dokter Gigi Profesional Parakita Medika" 
+                                 class="w-full h-auto object-cover rounded-b-full rounded-t-[200px] border-8 border-white shadow-2xl"
+                                 style="max-height: 550px; object-position: top;">
+                                 
+                            <!-- Floating Trust Card -->
+                            <div class="absolute bottom-10 -left-8 sm:-left-16 bg-white p-4 rounded-2xl shadow-xl flex items-center gap-4 z-30 animate-bounce" style="animation-duration: 4s;">
+                                <div class="bg-orange-100 p-3 rounded-full text-orange-500">
+                                    <i class="fa-solid fa-star text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-gray-900 text-lg">5.0 / 5.0</div>
+                                    <div class="text-xs text-gray-500">Klinik Terpercaya</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="absolute -bottom-16 left-0 right-0 z-40 hidden md:block px-4">
+                <div class="max-w-6xl mx-auto bg-white rounded-2xl shadow-premium p-6 border border-gray-100">
+                    <form class="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
+                        <div class="col-span-1">
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Nama Pasien</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fa-regular fa-user text-gray-400"></i>
+                                </div>
+                                <input type="text" placeholder="Nama Anda" class="booking-input w-full pl-10 pr-3 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 text-sm focus:bg-white transition-colors">
+                            </div>
+                        </div>
+                        <div class="col-span-1">
+                            <label class="block text-sm font-bold text-gray-700 mb-2">No. WhatsApp</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fa-solid fa-phone text-gray-400"></i>
+                                </div>
+                                <input type="tel" placeholder="08xx-xxxx-xxxx" class="booking-input w-full pl-10 pr-3 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 text-sm focus:bg-white transition-colors">
+                            </div>
+                        </div>
+                        <div class="col-span-1">
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Pilih Tanggal</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fa-regular fa-calendar text-gray-400"></i>
+                                </div>
+                                <input type="date" class="booking-input w-full pl-10 pr-3 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 text-sm focus:bg-white transition-colors">
+                            </div>
+                        </div>
+                        <div class="col-span-1">
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Keluhan / Layanan</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fa-solid fa-stethoscope text-gray-400"></i>
+                                </div>
+                                <select class="booking-input w-full pl-10 pr-3 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 text-sm focus:bg-white transition-colors appearance-none">
+                                    <option>Konsultasi Umum</option>
+                                    <option>Cabut Gigi</option>
+                                    <option>Scaling (Pembersihan Karang)</option>
+                                    <option>Pasang Behel</option>
+                                    <option>Lainnya</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-span-1">
+                            <button type="button" onclick="window.open('https://wa.me/6285255281488?text=Halo%20Admin%20Parakita%20Medika,%20saya%20ingin%20membuat%20janji%20temu.', '_blank')" class="w-full bg-brand text-white font-bold py-3 px-4 rounded-xl shadow-md hover:bg-brand-dark transition-colors hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand flex justify-center items-center h-[46px]">
+                                Buat Janji Sekarang
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spacer to accommodate floating bar on desktop -->
+        <div class="hidden md:block h-24 bg-white"></div>
+
+        <section id="fasilitas" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-brand font-bold text-sm tracking-widest uppercase mb-2">Kenyamanan Anda Prioritas Kami</h2>
+                    <h3 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">Fasilitas Klinik Parakita</h3>
+                    <div class="w-20 h-1.5 bg-brand mx-auto rounded-full mb-6"></div>
+                    <p class="text-lg text-gray-600">Kami menyediakan lingkungan yang bersih, nyaman, dan dilengkapi dengan teknologi medis terkini untuk memastikan perawatan gigi Anda berjalan aman dan optimal.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Fasilitas 1 -->
+                    <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:border-brand-light hover:shadow-xl transition-all duration-300 group">
+                        <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center text-brand text-2xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-microscope"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">Peralatan Modern</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">Dilengkapi alat dental canggih standar internasional untuk diagnosa presisi & tindakan minim rasa sakit.</p>
+                    </div>
+                    <!-- Fasilitas 2 -->
+                    <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:border-brand-light hover:shadow-xl transition-all duration-300 group">
+                        <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center text-brand text-2xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-spray-can-sparkles"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">Sterilisasi Terjamin</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">Standar kebersihan tingkat tinggi dengan alat sterilisasi *autoclave* untuk setiap instrumen yang digunakan.</p>
+                    </div>
+                    <!-- Fasilitas 3 -->
+                    <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:border-brand-light hover:shadow-xl transition-all duration-300 group">
+                        <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center text-brand text-2xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-couch"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">Ruang Tunggu Nyaman</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">Ruang tunggu Full AC yang wangi dan bersih, dilengkapi WiFi dan hiburan untuk Anda dan keluarga.</p>
+                    </div>
+                    <!-- Fasilitas 4 -->
+                    <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:border-brand-light hover:shadow-xl transition-all duration-300 group">
+                        <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center text-brand text-2xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-child-reaching"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">Kids Friendly</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">Pendekatan ramah anak agar si kecil tidak takut ke dokter gigi, dilengkapi area bermain sederhana.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="dokter" class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                    <div class="max-w-2xl">
+                        <h2 class="text-brand font-bold text-sm tracking-widest uppercase mb-2">Tim Ahli Kami</h2>
+                        <h3 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">Dokter Yang Bertugas</h3>
+                        <div class="w-20 h-1.5 bg-brand rounded-full"></div>
+                    </div>
+                    <a href="https://wa.me/6285255281488" target="_blank" class="hidden md:inline-flex items-center text-brand font-semibold hover:text-brand-dark transition-colors">
+                        Lihat Jadwal Dokter <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <!-- Dokter 1 -->
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 group">
+                        <div class="h-64 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=600&auto=format&fit=crop" alt="Dokter Gigi 1" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent h-24"></div>
+                        </div>
+                        <div class="p-6 relative -mt-8">
+                            <div class="bg-brand text-white text-xs font-bold px-3 py-1 rounded-full inline-block mb-3 shadow-md relative z-10">Dokter Gigi Umum</div>
+                            <h4 class="text-xl font-bold text-gray-900 mb-1">drg. Andi Sarah</h4>
+                            <p class="text-gray-500 text-sm mb-4">Berpengalaman dalam perawatan dasar, penambalan estetika, dan ekstraksi gigi.</p>
+                            <a href="https://wa.me/6285255281488?text=Halo%20saya%20ingin%20buat%20janji%20dengan%20drg.%20Andi%20Sarah" target="_blank" class="text-brand font-semibold text-sm hover:underline flex items-center">
+                                Buat Janji <i class="fa-solid fa-calendar-check ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Dokter 2 -->
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 group">
+                        <div class="h-64 overflow-hidden relative">
+                            <!-- Placeholder image for Orthodontist -->
+                            <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=600&auto=format&fit=crop" alt="Dokter Gigi 2" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent h-24"></div>
+                        </div>
+                        <div class="p-6 relative -mt-8">
+                            <div class="bg-brand text-white text-xs font-bold px-3 py-1 rounded-full inline-block mb-3 shadow-md relative z-10">Spesialis Ortodonti</div>
+                            <h4 class="text-xl font-bold text-gray-900 mb-1">drg. Budi Pratama, Sp.Ort</h4>
+                            <p class="text-gray-500 text-sm mb-4">Ahli dalam merapikan susunan gigi dengan berbagai jenis kawat gigi (behel) & Invisalign.</p>
+                            <a href="https://wa.me/6285255281488?text=Halo%20saya%20ingin%20buat%20janji%20dengan%20drg.%20Budi" target="_blank" class="text-brand font-semibold text-sm hover:underline flex items-center">
+                                Buat Janji <i class="fa-solid fa-calendar-check ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Dokter 3 -->
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 group">
+                        <div class="h-64 overflow-hidden relative">
+                            <!-- Placeholder image -->
+                            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=600&auto=format&fit=crop" alt="Dokter Gigi 3" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent h-24"></div>
+                        </div>
+                        <div class="p-6 relative -mt-8">
+                            <div class="bg-brand text-white text-xs font-bold px-3 py-1 rounded-full inline-block mb-3 shadow-md relative z-10">Spesialis Bedah Mulut</div>
+                            <h4 class="text-xl font-bold text-gray-900 mb-1">drg. Citra Lestari, Sp.BM</h4>
+                            <p class="text-gray-500 text-sm mb-4">Fokus pada pencabutan gigi bungsu impaksi, bedah minor rahang, dan implan gigi.</p>
+                            <a href="https://wa.me/6285255281488?text=Halo%20saya%20ingin%20buat%20janji%20dengan%20drg.%20Citra" target="_blank" class="text-brand font-semibold text-sm hover:underline flex items-center">
+                                Buat Janji <i class="fa-solid fa-calendar-check ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-8 text-center md:hidden">
+                    <a href="https://wa.me/6285255281488" class="inline-flex items-center text-brand font-bold">
+                        Lihat Semua Jadwal Dokter <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-12 bg-white border-y border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <p class="text-center text-sm font-bold text-gray-400 uppercase tracking-widest mb-8">Klinik Rekanan & Dipercaya Oleh</p>
+                <div class="flex flex-wrap justify-center items-center gap-10 md:gap-20">
+                    <div class="flex items-center gap-2 text-2xl font-black text-gray-400 hover:text-brand transition-colors duration-300">
+                        <i class="fa-solid fa-a"></i>dMedika
+                    </div>
+                    <div class="flex items-center gap-2 text-xl font-black text-gray-400 hover:text-orange-500 transition-colors duration-300">
+                        <i class="fa-solid fa-building-columns"></i> BNI Life
+                    </div>
+                    <div class="flex items-center gap-2 text-xl font-black text-gray-400 hover:text-blue-600 transition-colors duration-300">
+                        <i class="fa-solid fa-shield-halved"></i> BRI Life
+                    </div>
+                    <div class="flex items-center gap-2 text-2xl font-black text-gray-400 hover:text-purple-600 transition-colors duration-300 tracking-tighter">
+                        KLAR
+                    </div>
+                    <div class="flex items-center gap-2 text-xl font-black text-gray-400 hover:text-green-600 transition-colors duration-300">
+                        <i class="fa-solid fa-heart-pulse"></i> CareNow+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimoni" class="py-20 bg-gray-50 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-brand-light/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-brand font-bold text-sm tracking-widest uppercase mb-2">Kata Mereka</h2>
+                    <h3 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">Senyum Bahagia Pasien Kami</h3>
+                    <div class="w-20 h-1.5 bg-brand mx-auto rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Testimoni 1 -->
+                    <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-lg transition-shadow">
+                        <div class="flex text-yellow-400 mb-4 text-sm">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-600 mb-6 italic">"Scaling gigi di Parakita Medika bener-bener bersih dan ngga ngilu. Dokternya sabar banget jelasin kondisi gigi kita. Harganya juga transparan dari awal."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center font-bold text-gray-500">AN</div>
+                            <div>
+                                <h5 class="font-bold text-gray-900 text-sm">Annisa N.</h5>
+                                <p class="text-xs text-gray-500">Pasien Scaling</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimoni 2 -->
+                    <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-lg transition-shadow relative transform md:-translate-y-4">
+                        <div class="absolute -top-4 right-8 w-8 h-8 bg-brand rounded-full flex items-center justify-center text-white">
+                            <i class="fa-solid fa-quote-right text-xs"></i>
+                        </div>
+                        <div class="flex text-yellow-400 mb-4 text-sm">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-600 mb-6 italic">"Akhirnya nemu klinik yang bisa cabut gigi bungsu tanpa rasa takut. Ruangannya nyaman, pas tindakan juga disetelkan musik jadi lebih rileks. Mantap Parakita!"</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center font-bold text-gray-500">RF</div>
+                            <div>
+                                <h5 class="font-bold text-gray-900 text-sm">Reza Fahlevi</h5>
+                                <p class="text-xs text-gray-500">Pasien Odontektomi</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimoni 3 -->
+                    <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-lg transition-shadow">
+                        <div class="flex text-yellow-400 mb-4 text-sm">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <p class="text-gray-600 mb-6 italic">"Bawa anak kesini buat periksa gigi berlubang. Ajaib anaknya ngga nangis karena dokternya pinter ambil hati anak. Tempatnya juga kids friendly ada mainan."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center font-bold text-gray-500">ibu</div>
+                            <div>
+                                <h5 class="font-bold text-gray-900 text-sm">Ibu Mutia</h5>
+                                <p class="text-xs text-gray-500">Pasien Anak</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="py-20 bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Pertanyaan Seputar Klinik</h2>
+                    <p class="text-gray-600">Temukan jawaban untuk pertanyaan yang paling sering ditanyakan oleh pasien kami.</p>
+                </div>
+
+                <div class="space-y-4" id="faq-container">
+                    <!-- FAQ Item 1 -->
+                    <div class="border border-gray-200 rounded-2xl overflow-hidden bg-gray-50">
+                        <button class="faq-button w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" onclick="toggleFaq(this)">
+                            <span class="font-bold text-gray-900">Apakah bisa menggunakan Asuransi / BPJS?</span>
+                            <i class="fa-solid fa-chevron-down text-brand faq-icon"></i>
+                        </button>
+                        <div class="faq-answer px-6 text-gray-600 text-sm leading-relaxed">
+                            Saat ini kami menerima pasien asuransi dari AdMedika, BNI Life, BRI Life, dan CareNow+. Untuk BPJS Kesehatan, saat ini sedang dalam proses pengajuan. Namun, kami sering mengadakan promo khusus untuk pasien umum.
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 2 -->
+                    <div class="border border-gray-200 rounded-2xl overflow-hidden bg-gray-50">
+                        <button class="faq-button w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" onclick="toggleFaq(this)">
+                            <span class="font-bold text-gray-900">Apakah harus reservasi / buat janji terlebih dahulu?</span>
+                            <i class="fa-solid fa-chevron-down text-brand faq-icon"></i>
+                        </button>
+                        <div class="faq-answer px-6 text-gray-600 text-sm leading-relaxed">
+                            Kami sangat menyarankan Anda untuk melakukan reservasi via WhatsApp agar tidak perlu mengantri lama. Namun, jika dalam kondisi darurat (gigi patah/sakit parah), Anda bisa langsung datang ke klinik (walk-in).
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 3 -->
+                    <div class="border border-gray-200 rounded-2xl overflow-hidden bg-gray-50">
+                        <button class="faq-button w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" onclick="toggleFaq(this)">
+                            <span class="font-bold text-gray-900">Berapa biaya cabut gigi / scaling?</span>
+                            <i class="fa-solid fa-chevron-down text-brand faq-icon"></i>
+                        </button>
+                        <div class="faq-answer px-6 text-gray-600 text-sm leading-relaxed">
+                            Biaya perawatan sangat bervariasi tergantung pada tingkat keparahan kasus. Sebagai gambaran, biaya scaling dimulai dari Rp 150.000. Untuk estimasi biaya pasti, sebaiknya konsultasikan langsung dengan dokter kami (konsultasi awal gratis via WA).
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 4 -->
+                    <div class="border border-gray-200 rounded-2xl overflow-hidden bg-gray-50">
+                        <button class="faq-button w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" onclick="toggleFaq(this)">
+                            <span class="font-bold text-gray-900">Dimana lokasi Klinik Gigi Parakita Medika?</span>
+                            <i class="fa-solid fa-chevron-down text-brand faq-icon"></i>
+                        </button>
+                        <div class="faq-answer px-6 text-gray-600 text-sm leading-relaxed">
+                            Klinik kami berada di Makassar. Anda bisa dengan mudah menemukan lokasi kami melalui Google Maps. Cukup klik tombol 'Lihat Peta' di bagian bawah halaman ini atau <a href="https://share.google/sYSsaLAS2V16d5z5F" target="_blank" class="text-brand font-bold hover:underline">klik disini</a> untuk rute langsung.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<section id="instagram" class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            
+            <div class="text-center mb-12">
+                <div class="inline-block px-4 py-2 bg-green-100 text-[#0f764a] font-bold rounded-full text-sm mb-4">
+                    @parakitamedika
+                </div>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">Ikuti Kami di <span class="text-[#0f764a]">Instagram</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Dapatkan tips kesehatan gigi harian, info promo terbaru, dan lihat langsung senyum cerah para pasien kami.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
+                
+                <div class="w-full max-w-sm overflow-hidden bg-white rounded-2xl shadow-md">
+                    
+                    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DaP3OQhSRe-/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/p/DaP3OQhSRe-/?utm_source=ig_embed&amp;utm_campaign=loading" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div></div></div><div style="padding: 19% 0;"></div> <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">View this post on Instagram</div></div><div style="padding: 12.5% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div> <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;"> <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div> <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div> <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;"></div></div></a><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/p/DaP3OQhSRe-/?utm_source=ig_embed&amp;utm_campaign=loading" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">A post shared by Dokter Gigi Spesialis Makassar (@klinikparakita)</a></p></div></blockquote>
+<script async src="//www.instagram.com/embed.js"></script>
+
+                    </div>
+
+                <div class="w-full max-w-sm overflow-hidden bg-white rounded-2xl shadow-md">
+                    
+                    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DWikFOij6Vf/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/p/DWikFOij6Vf/?utm_source=ig_embed&amp;utm_campaign=loading" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div></div></div><div style="padding: 19% 0;"></div> <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">View this post on Instagram</div></div><div style="padding: 12.5% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div> <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;"> <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div> <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div> <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;"></div></div></a><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/p/DWikFOij6Vf/?utm_source=ig_embed&amp;utm_campaign=loading" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">A post shared by Dokter Gigi Spesialis Makassar (@klinikparakita)</a></p></div></blockquote>
+<script async src="//www.instagram.com/embed.js"></script>
+
+                    </div>
+
+                <div class="w-full max-w-sm overflow-hidden bg-white rounded-2xl shadow-md">
+                    
+                <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DUuX_oAj6R-/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/p/DUuX_oAj6R-/?utm_source=ig_embed&amp;utm_campaign=loading" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div></div></div><div style="padding: 19% 0;"></div> <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">View this post on Instagram</div></div><div style="padding: 12.5% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div> <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;"> <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div> <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div> <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;"></div></div></a><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/p/DUuX_oAj6R-/?utm_source=ig_embed&amp;utm_campaign=loading" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">A post shared by Dokter Gigi Spesialis Makassar (@klinikparakita)</a></p></div></blockquote>
+<script async src="//www.instagram.com/embed.js"></script>
+
+                    </div>
+
+            </div>
+
+        </div>
+    </section>
+
+        <section class="py-16 md:py-24 relative overflow-hidden bg-brand">
+            <!-- Decorative background elements -->
+            <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+CjxwYXRoIGQ9Ik0wIDBoNDB2NDBIMHoiIGZpbGw9Im5vbmUiLz4KPHBhdGggZD0iTTIwIDIwYy0xMS4wNDYgMC0yMC04Ljk1NC0yMC0yMHMyMC0yMCAyMC0yMCAyMCA4Ljk1NCAyMCAyMC04Ljk1NCAyMC0yMCAyMHptMC0zOGMtOS45NDEgMC0xOCA4LjA1OS0xOCAxOHMxOCAxOCAxOCAxOCAxOC04LjA1OSAxOC0xOC04LjA1OS0xOC0xOC0xOHoiIGZpbGw9IiNmZmZmZmYiIG9wYWNpdHk9Ii4xIi8+Cjwvc3ZnPg==')]"></div>
+            <div class="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
+            <div class="absolute bottom-0 left-0 w-64 h-64 bg-brand-dark/50 rounded-full blur-2xl -translate-x-1/2 translate-y-1/2"></div>
+            
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
+                    Jangan Tunda <span class="text-yellow-300">Kesehatan Gigi</span> Anda
+                </h2>
+                <p class="text-brand-light text-lg mb-10 max-w-2xl mx-auto">
+                    Dapatkan senyum terbaik Anda kembali. Jadwalkan konsultasi dengan dokter gigi ahli kami hari ini dan nikmati pelayanan yang nyaman dan terjangkau.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="https://wa.me/6285255281488" target="_blank" 
+                       class="inline-flex items-center justify-center px-8 py-4 bg-white text-brand font-bold rounded-full shadow-lg hover:bg-gray-50 hover:scale-105 transition-all duration-300 text-lg">
+                        <i class="fa-brands fa-whatsapp text-2xl mr-3 text-green-500"></i>
+                        Hubungi via WhatsApp
+                    </a>
+                    <a href="https://share.google/sYSsaLAS2V16d5z5F" target="_blank" 
+                       class="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-white text-white font-bold rounded-full hover:bg-white/10 transition-colors text-lg">
+                        <i class="fa-solid fa-map-location-dot mr-3"></i>
+                        Lihat Lokasi Klinik
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Floating WhatsApp Button (Mobile) -->
+        <a href="https://wa.me/6285255281488" target="_blank" class="fixed bottom-6 right-6 z-50 md:hidden bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:bg-green-600 hover:scale-110 transition-all duration-300">
+            <i class="fa-brands fa-whatsapp text-3xl"></i>
+            <span class="absolute -top-1 -right-1 flex h-4 w-4">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-4 w-4 bg-red-500 border-2 border-white"></span>
+            </span>
+        </a>
+
+    </main>
+
+    <footer class="bg-gray-900 text-white py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Brand Info -->
+                <div class="col-span-1 md:col-span-2 pr-4">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 bg-brand rounded-full flex items-center justify-center text-white">
+                            <i class="fa-solid fa-tooth"></i>
+                        </div>
+                        <span class="font-bold text-xl">Parakita Medika</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed max-w-sm">
+                        Klinik Gigi terpercaya di Makassar untuk mengembalikan senyum cantikmu. Pelayanan profesional dengan sepenuh hati, fasilitas modern, dan dokter spesialis berpengalaman.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-brand hover:text-white transition-colors">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-brand hover:text-white transition-colors">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-brand hover:text-white transition-colors">
+                            <i class="fa-brands fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-white">Tautan Cepat</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#fasilitas" class="text-gray-400 hover:text-brand transition-colors text-sm">Fasilitas</a></li>
+                        <li><a href="#dokter" class="text-gray-400 hover:text-brand transition-colors text-sm">Tim Dokter</a></li>
+                        <li><a href="#testimoni" class="text-gray-400 hover:text-brand transition-colors text-sm">Testimoni Pasien</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-brand transition-colors text-sm">FAQ / Tanya Jawab</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Footer -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-white">Hubungi Kami</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-green-500 mr-3 flex-shrink-0">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 mb-1">WhatsApp / Telepon</p>
+                                <a href="https://wa.me/6285255281488" target="_blank" class="text-gray-300 font-semibold text-sm hover:text-brand">+62 852-5528-1488</a>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-blue-500 mr-3 flex-shrink-0">
+                                <i class="fa-solid fa-map-location-dot"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 mb-1">Lokasi Klinik</p>
+                                <a href="https://share.google/sYSsaLAS2V16d5z5F" target="_blank" class="text-gray-300 text-sm hover:text-brand transition-colors">Makassar, Sulawesi Selatan<br><span class="text-brand text-xs underline mt-1 inline-block">Buka di Google Maps</span></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-xs">
+                    &copy; <span id="year"></span> Klinik Gigi Parakita Medika. All rights reserved.
+                </p>
+                <div class="mt-4 md:mt-0 flex items-center gap-4 text-xs text-gray-500">
+                    Desain & Pengembangan untuk Parakita Medika
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'py-2');
+                navbar.classList.remove('bg-transparent', 'py-4');
+            } else {
+                navbar.classList.remove('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'py-2');
+                navbar.classList.add('bg-transparent', 'py-4');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    // Adjust offset for fixed header
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+  
+                    window.scrollTo({
+                         top: offsetPosition,
+                         behavior: "smooth"
+                    });
+                }
+            });
+        });
+
+        // FAQ Accordion logic
+        function toggleFaq(button) {
+            const answer = button.nextElementSibling;
+            const icon = button.querySelector('.faq-icon');
+            
+            // Check if currently open
+            const isOpen = answer.classList.contains('open');
+            
+            // Close all other FAQs (Optional: remove this block if you want multiple open at once)
+            document.querySelectorAll('.faq-answer').forEach(el => el.classList.remove('open'));
+            document.querySelectorAll('.faq-icon').forEach(el => el.classList.remove('open'));
+            
+            // Toggle current FAQ
+            if (!isOpen) {
+                answer.classList.add('open');
+                icon.classList.add('open');
+            }
+        }
+    </script>
+</body>
+</html>
